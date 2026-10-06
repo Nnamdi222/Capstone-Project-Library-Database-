@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#173e35">
+    <title>Good Shelf | Library Desk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Good Shelf home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M5 7.5c4.2-1.4 7.9-.7 11 2.2v16c-3.1-2.9-6.8-3.6-11-2.2v-16Z" fill="#F2C95D" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M27 7.5c-4.2-1.4-7.9-.7-11 2.2v16c3.1-2.9 6.8-3.6 11-2.2v-16Z" fill="#F08B6B" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M16 10v15" stroke="currentColor" stroke-width="1.7"/>
+          </svg>
+        </span>
+        <span class="brand-name">good shelf<span class="brand-period">.</span></span>
+      </a>
+      <div class="topbar-right">
+        <span class="open-indicator"><span></span> Desk is open</span>
+        <span class="avatar" aria-label="Library desk">GS</span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="welcome" aria-labelledby="welcome-title">
+        <div class="welcome-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR NEIGHBORHOOD LIBRARY</p>
+          <h1 id="welcome-title">A good day<br>to <em>get lost.</em></h1>
+          <p class="welcome-date" id="today-label"></p>
+        </div>
+        <div class="book-art" aria-hidden="true">
+          <svg viewBox="0 0 440 230" role="presentation">
+            <path d="M39 192c57-12 115-11 175 4 61-15 123-16 187-4" fill="none" stroke="#173e35" stroke-width="2" stroke-linecap="round"/>
+            <path d="M76 177V63c34-14 68-10 101 12v116c-33-22-67-26-101-14Z" fill="#e66c4f" stroke="#173e35" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M177 75c34-22 68-26 101-12v114c-33-12-67-8-101 14V75Z" fill="#f5d36f" stroke="#173e35" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M177 76v101" stroke="#173e35" stroke-width="3"/>
+            <path d="M92 85c20-6 41-3 61 8M92 101c20-6 41-3 61 8M92 117c20-6 41-3 61 8" stroke="#fff6df" stroke-width="3" stroke-linecap="round"/>
+            <path d="M197 91c20-9 41-12 61-8M197 107c20-9 41-12 61-8M197 123c20-9 41-12 61-8" stroke="#fff9e9" stroke-width="3" stroke-linecap="round"/>
+            <path d="M303 177V88c26-10 52-7 77 9v91c-25-16-51-19-77-11Z" fill="#74a891" stroke="#173e35" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M318 109c15-4 29-2 44 6M318 124c15-4 29-2 44 6M318 139c15-4 29-2 44 6" stroke="#eff1d7" stroke-width="3" stroke-linecap="round"/>
+            <path d="m341 34 4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10Z" fill="#e66c4f" stroke="#173e35" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="64" cy="112" r="5" fill="#f2c95d" stroke="#173e35" stroke-width="2"/>
+          </svg>
+          <span class="art-caption">A whole world, one card away</span>
+        </div>
+      </section>
+
+      <section class="pulse" aria-label="Library at a glance">
+        <div class="pulse-item"><span class="pulse-number" id="stat-titles">—</span><span class="pulse-label">titles on the shelf</span></div>
+        <div class="pulse-item"><span class="pulse-number" id="stat-available">—</span><span class="pulse-label">copies ready to roam</span></div>
+        <div class="pulse-item"><span class="pulse-number" id="stat-loans">—</span><span class="pulse-label">currently out exploring</span></div>
+        <div class="pulse-note"><span class="pulse-spark" aria-hidden="true">✳</span><span id="pulse-note">Every book has a next chapter.</span></div>
+      </section>
+
+      <section class="workspace" aria-label="Library collection">
+        <div class="workspace-heading">
+          <div>
+            <p class="eyebrow section-eyebrow"><span class="eyebrow-line"></span> THE LIBRARY DESK</p>
+            <h2 id="view-title">The shelves</h2>
+          </div>
+          <button class="button button-primary" id="primary-action" type="button">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+            <span>Add a book</span>
+          </button>
+        </div>
+
+        <div class="desk-tools">
+          <nav class="tabs" aria-label="Library sections" role="tablist">
+            <button class="tab is-active" type="button" role="tab" aria-selected="true" data-view="books">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.5c2.6-.8 4.9-.4 7 1.4v10.2c-2.1-1.8-4.4-2.2-7-1.4V4.5Zm14 0c-2.6-.8-4.9-.4-7 1.4v10.2c2.1-1.8 4.4-2.2 7-1.4V4.5Z"/></svg>
+              Shelves <span class="tab-count" id="tab-book-count">0</span>
+            </button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-view="patrons">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="7" r="3"/><path d="M2.5 16c.4-2.6 2-4 4.5-4s4.1 1.4 4.5 4M13 5.2a3 3 0 0 1 0 5.8m1.2 1.2c1.8.4 2.8 1.7 3.1 3.8"/></svg>
+              Readers <span class="tab-count" id="tab-patron-count">0</span>
+            </button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-view="loans">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 3.5h8l4 4v9H4v-13Z"/><path d="M12 3.5v4h4M7 11h6M7 14h4"/></svg>
+              Borrowed <span class="tab-count" id="tab-loan-count">0</span>
+            </button>
+          </nav>
+
+          <div class="tool-filters">
+            <label class="search-box" id="search-wrap">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.7" cy="8.7" r="5.8"/><path d="m13 13 4 4"/></svg>
+              <span class="sr-only" id="search-label">Search titles</span>
+              <input id="search-input" type="search" placeholder="Find a title or author" autocomplete="off">
+            </label>
+            <label class="select-wrap" id="availability-wrap">
+              <span class="sr-only">Filter by availability</span>
+              <select id="availability-filter">
+                <option value="all">Any status</option>
+                <option value="true">On the shelf</option>
+                <option value="false">All checked out</option>
+              </select>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+            </label>
+            <label class="select-wrap is-hidden" id="loan-filter-wrap">
+              <span class="sr-only">Filter loans</span>
+              <select id="loan-filter">
+                <option value="active">Currently borrowed</option>
+                <option value="returned">Returned</option>
+                <option value="all">All loans</option>
+              </select>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+            </label>
+          </div>
+        </div>
+
+        <div class="list-meta"><span id="list-summary">Loading the shelves…</span><span class="list-meta-right" id="list-meta-right"></span></div>
+        <div class="collection" id="collection" aria-live="polite" aria-busy="true"></div>
+        <div class="pagination" id="pagination"></div>
+      </section>
+
+      <footer class="page-footer"><span>GOOD SHELF <span class="brand-period">✳</span> MADE FOR THE LOVE OF A GOOD STORY</span><span id="footer-year"></span></footer>
+    </main>
+
+    <dialog class="modal" id="book-dialog" aria-labelledby="book-dialog-title">
+      <form id="book-form">
+        <div class="modal-top"><span class="modal-kicker">A NEW SPINE ON THE SHELF</span><button class="icon-button" type="button" data-close="book-dialog" aria-label="Close dialog">×</button></div>
+        <h2 id="book-dialog-title">Add a book</h2>
+        <label class="field-label">Title <input name="title" required maxlength="300" placeholder="The Secret Garden"></label>
+        <label class="field-label">Author <input name="author" required maxlength="200" placeholder="Frances Hodgson Burnett"></label>
+        <div class="field-row">
+          <label class="field-label">ISBN <span class="optional">optional</span><input name="isbn" maxlength="32" placeholder="978…"></label>
+          <label class="field-label">Year <span class="optional">optional</span><input name="publicationYear" type="number" min="0" max="9999" placeholder="1911"></label>
+        </div>
+        <label class="field-label">Copies <input name="totalCopies" type="number" min="1" step="1" value="1" required></label>
+        <p class="form-error" id="book-error" role="alert"></p>
+        <button class="button button-primary modal-submit" type="submit">Add to the shelves <span aria-hidden="true">↗</span></button>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="patron-dialog" aria-labelledby="patron-dialog-title">
+      <form id="patron-form">
+        <div class="modal-top"><span class="modal-kicker">A NEW FRIEND OF THE LIBRARY</span><button class="icon-button" type="button" data-close="patron-dialog" aria-label="Close dialog">×</button></div>
+        <h2 id="patron-dialog-title">Add a reader</h2>
+        <label class="field-label">Name <input name="name" required maxlength="200" placeholder="Alex Rivera"></label>
+        <label class="field-label">Email <input name="email" type="email" required maxlength="320" placeholder="alex@example.com"></label>
+        <p class="form-error" id="patron-error" role="alert"></p>
+        <button class="button button-primary modal-submit" type="submit">Welcome them in <span aria-hidden="true">↗</span></button>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="loan-dialog" aria-labelledby="loan-dialog-title">
+      <form id="loan-form">
+        <div class="modal-top"><span class="modal-kicker">SEND A STORY OUT INTO THE WORLD</span><button class="icon-button" type="button" data-close="loan-dialog" aria-label="Close dialog">×</button></div>
+        <h2 id="loan-dialog-title">Check out a book</h2>
+        <label class="field-label">Choose a book <select name="bookId" id="loan-book-select" required></select></label>
+        <label class="field-label">Reader <select name="patronId" id="loan-patron-select" required></select></label>
+        <label class="field-label">Due back <input name="dueDate" id="loan-due-date" type="date" required></label>
+        <p class="form-error" id="loan-error" role="alert"></p>
+        <button class="button button-primary modal-submit" type="submit">Let it go explore <span aria-hidden="true">↗</span></button>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

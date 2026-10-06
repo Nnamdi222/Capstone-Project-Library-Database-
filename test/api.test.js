@@ -29,6 +29,20 @@ test('health endpoint reports ready', async () => {
   assert.deepEqual(await response.json(), { status: 'ok' });
 });
 
+test('browser dashboard and its assets are served by the API origin', async () => {
+  const [page, script, stylesheet] = await Promise.all([
+    fetch(`${baseUrl}/`),
+    fetch(`${baseUrl}/app.js`),
+    fetch(`${baseUrl}/styles.css`),
+  ]);
+  assert.equal(page.status, 200);
+  assert.match(page.headers.get('content-type'), /text\/html/);
+  assert.match(await page.text(), /Good Shelf/);
+  assert.match(script.headers.get('content-type'), /javascript/);
+  assert.match(await script.text(), /function renderCurrent/);
+  assert.match(stylesheet.headers.get('content-type'), /text\/css/);
+});
+
 test('book and patron creation enforce unique identifiers', async () => {
   const book = await post('/api/books', {
     isbn: '9780547928227', title: 'The Hobbit', author: 'J. R. R. Tolkien', totalCopies: 1,

@@ -1,7 +1,14 @@
 import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
 import { openDatabase } from './database.js';
 
 const MAX_BODY_BYTES = 1024 * 1024;
+const staticAssets = new Map([
+  ['/', ['index.html', 'text/html; charset=utf-8']],
+  ['/index.html', ['index.html', 'text/html; charset=utf-8']],
+  ['/app.js', ['app.js', 'text/javascript; charset=utf-8']],
+  ['/styles.css', ['styles.css', 'text/css; charset=utf-8']],
+]);
 
 class ApiError extends Error {
   constructor(status, code, message) {
@@ -113,6 +120,14 @@ export function createLibraryServer({ databasePath = process.env.DATABASE_PATH ?
       const url = new URL(request.url, 'http://localhost');
       const method = request.method;
       const path = url.pathname;
+
+      if (method === 'GET' && staticAssets.has(path)) {
+        const [fileName, contentType] = staticAssets.get(path);
+        const content = await readFile(new URL(`../${fileName}`, import.meta.url));
+        response.writeHead(200, { 'Content-Type': contentType, 'Cache-Control': 'no-cache' });
+        response.end(content);
+        return;
+      }
 
       if (method === 'GET' && path === '/health') {
         return sendJson(response, 200, { status: 'ok' });

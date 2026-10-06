@@ -17,6 +17,8 @@ npm start
 
 The API listens on `http://localhost:3000`. The SQLite database is created at `data/library.db` on first start. Configure the listener and database location with `PORT`, `HOST`, and `DATABASE_PATH`:
 
+Open `http://localhost:3000` for the browser dashboard. It supports searching/filtering the catalog, adding books and readers, checking out available books, and marking loans returned. The dashboard and API are served from the same origin.
+
 ```sh
 PORT=8080 DATABASE_PATH=./library.db npm start
 ```
