@@ -111,7 +111,7 @@ h1 em { color: var(--coral); font-weight: 500; }
 .collection { min-height: 220px; border-top: 1px solid var(--ink); }
 .column-head, .book-row, .patron-row, .loan-row { display: grid; align-items: center; column-gap: 15px; }
 .column-head { min-height: 35px; padding: 0 13px; color: #7e8a7e; font: 9px var(--mono); text-transform: uppercase; }
-.book-grid { grid-template-columns: minmax(220px, 1.5fr) minmax(145px, 1fr) 100px 128px; }
+.book-grid { grid-template-columns: minmax(220px, 1.5fr) minmax(145px, 1fr) 100px 78px; }
 .patron-grid { grid-template-columns: minmax(220px, 1.3fr) minmax(180px, 1fr) 100px; }
 .loan-grid { grid-template-columns: minmax(220px, 1.25fr) minmax(180px, 1fr) 130px 125px; }
 .book-row, .patron-row, .loan-row { min-height: 76px; padding: 9px 13px; border-top: 1px solid #e2e6dc; animation: row-in 280ms ease both; }
@@ -128,6 +128,13 @@ h1 em { color: var(--coral); font-weight: 500; }
 .stock.is-out { color: #a65843; }
 .stock.is-out::before { background: var(--coral); }
 .row-action { justify-self: end; }
+.row-actions { justify-self: end; display: flex; align-items: center; gap: 5px; }
+.icon-action { width: 31px; height: 31px; display: grid; place-items: center; padding: 0; border: 1px solid transparent; border-radius: 3px; color: #557164; background: transparent; cursor: pointer; }
+.icon-action:hover { border-color: #c7d3c4; background: #edf1e8; }
+.icon-action:disabled { opacity: .4; cursor: default; }
+.icon-action svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.icon-action.remove-action { color: #8d685e; }
+.icon-action.remove-action:hover { border-color: #e7c9bf; color: #ad513d; background: #fbefeb; }
 .reader-avatar { width: 36px; height: 36px; flex: none; display: grid; place-items: center; border: 1px solid #c5d4bf; border-radius: 50%; background: #e8eee2; color: #456851; font: 11px var(--mono); }
 .reader-name { color: var(--ink); font: 500 14px var(--serif); }
 .reader-email { color: #6f8074; font-size: 11px; overflow-wrap: anywhere; }

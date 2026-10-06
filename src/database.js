@@ -123,6 +123,12 @@ export function openDatabase(databasePath) {
     isbnExists(isbn) {
       return Boolean(database.prepare('SELECT 1 FROM books WHERE isbn = ?').get(isbn));
     },
+    hasLoansForBook(id) {
+      return Boolean(database.prepare('SELECT 1 FROM loans WHERE book_id = ? LIMIT 1').get(id));
+    },
+    deleteBook(id) {
+      return database.prepare('DELETE FROM books WHERE id = ?').run(id).changes > 0;
+    },
     findPatron(id) {
       return mapPatron(database.prepare('SELECT * FROM patrons WHERE id = ?').get(id));
     },
@@ -145,6 +151,12 @@ export function openDatabase(databasePath) {
     },
     emailExists(email) {
       return Boolean(database.prepare('SELECT 1 FROM patrons WHERE email = ? COLLATE NOCASE').get(email));
+    },
+    hasLoansForPatron(id) {
+      return Boolean(database.prepare('SELECT 1 FROM loans WHERE patron_id = ? LIMIT 1').get(id));
+    },
+    deletePatron(id) {
+      return database.prepare('DELETE FROM patrons WHERE id = ?').run(id).changes > 0;
     },
     listLoans({ status, patronId, bookId, limit, offset }) {
       const clauses = [];

@@ -110,7 +110,7 @@ function bookMarkup(book, index) {
     <div class="book-cell"><div class="book-cover" style="background:${cover}"><span>${escapeHtml(initials(book.title).slice(0, 1))}</span></div><div class="book-text"><div class="book-title">${escapeHtml(book.title)}</div><div class="book-author">${escapeHtml(book.author)}</div></div></div>
     <div class="detail-cell">${detailText}</div>
     <div><span class="stock${out ? ' is-out' : ''}">${out ? 'All borrowed' : `${book.availableCopies} of ${book.totalCopies} ready`}</span></div>
-    <button class="button button-small row-action" data-checkout-book="${book.id}" ${out ? 'disabled title="No copies are currently available"' : ''}>Check out</button>
+    <div class="row-actions"><button class="icon-action" data-checkout-book="${book.id}" aria-label="Check out ${escapeHtml(book.title)}" title="Check out" ${out ? 'disabled title="No copies are currently available"' : ''}><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12m-6-6h12"/></svg></button><button class="icon-action remove-action" data-remove-book="${book.id}" aria-label="Remove ${escapeHtml(book.title)}" title="Remove book"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 6h12m-10 0 .7 10h6.6L14 6M8 6V4h4v2m-3 3v4m2-4v4"/></svg></button></div>
   </div>`;
 }
 
@@ -118,7 +118,7 @@ function patronMarkup(patron) {
   return `<div class="patron-row patron-grid">
     <div class="book-cell"><span class="reader-avatar">${escapeHtml(initials(patron.name))}</span><div><div class="reader-name">${escapeHtml(patron.name)}</div><div class="reader-email">${escapeHtml(patron.email)}</div></div></div>
     <div class="reader-email">Joined ${new Date(patron.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}</div>
-    <span class="reader-created"></span>
+    <button class="icon-action remove-action" data-remove-patron="${patron.id}" aria-label="Remove reader ${escapeHtml(patron.name)}" title="Remove reader"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 6h12m-10 0 .7 10h6.6L14 6M8 6V4h4v2m-3 3v4m2-4v4"/></svg></button>
   </div>`;
 }
 
@@ -299,6 +299,38 @@ elements.pagination.addEventListener('click', (event) => {
 });
 
 elements.collection.addEventListener('click', async (event) => {
+  const removeBook = event.target.closest('[data-remove-book]');
+  if (removeBook) {
+    const book = state.books.find((item) => item.id === Number(removeBook.dataset.removeBook));
+    if (!book || !window.confirm(`Remove “${book.title}” from the library? Books with loan history cannot be removed.`)) return;
+    removeBook.disabled = true;
+    try {
+      await api(`/api/books/${book.id}`, { method: 'DELETE' });
+      toast('Book removed from the shelves.');
+      await refreshOverview();
+      await renderCurrent();
+    } catch (error) {
+      removeBook.disabled = false;
+      toast(error.message);
+    }
+    return;
+  }
+  const removePatron = event.target.closest('[data-remove-patron]');
+  if (removePatron) {
+    const patron = state.patrons.find((item) => item.id === Number(removePatron.dataset.removePatron));
+    if (!patron || !window.confirm(`Remove reader “${patron.name}”? Readers with loan history cannot be removed.`)) return;
+    removePatron.disabled = true;
+    try {
+      await api(`/api/patrons/${patron.id}`, { method: 'DELETE' });
+      toast('Reader removed from the library.');
+      await refreshOverview();
+      await renderCurrent();
+    } catch (error) {
+      removePatron.disabled = false;
+      toast(error.message);
+    }
+    return;
+  }
   const checkout = event.target.closest('[data-checkout-book]');
   if (checkout) return openLoanDialog(Number(checkout.dataset.checkoutBook));
   const returnButton = event.target.closest('[data-return-loan]');

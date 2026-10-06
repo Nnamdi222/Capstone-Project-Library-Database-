@@ -154,6 +154,17 @@ export function createLibraryServer({ databasePath = process.env.DATABASE_PATH ?
         return sendJson(response, 200, book);
       }
 
+      if (method === 'DELETE' && bookMatch) {
+        const id = positiveInteger(bookMatch[1], 'id');
+        if (!database.findBook(id)) throw new ApiError(404, 'not_found', 'Book not found.');
+        if (database.hasLoansForBook(id)) {
+          throw new ApiError(409, 'has_loan_history', 'This book cannot be removed because it has loan history.');
+        }
+        database.deleteBook(id);
+        response.writeHead(204);
+        return response.end();
+      }
+
       if (method === 'POST' && path === '/api/books') {
         const body = await readJson(request);
         const isbn = body.isbn === undefined || body.isbn === null ? null : requiredString(body, 'isbn');
@@ -180,6 +191,17 @@ export function createLibraryServer({ databasePath = process.env.DATABASE_PATH ?
         const patron = database.findPatron(positiveInteger(patronMatch[1], 'id'));
         if (!patron) throw new ApiError(404, 'not_found', 'Patron not found.');
         return sendJson(response, 200, patron);
+      }
+
+      if (method === 'DELETE' && patronMatch) {
+        const id = positiveInteger(patronMatch[1], 'id');
+        if (!database.findPatron(id)) throw new ApiError(404, 'not_found', 'Patron not found.');
+        if (database.hasLoansForPatron(id)) {
+          throw new ApiError(409, 'has_loan_history', 'This reader cannot be removed because they have loan history.');
+        }
+        database.deletePatron(id);
+        response.writeHead(204);
+        return response.end();
       }
 
       if (method === 'POST' && path === '/api/patrons') {

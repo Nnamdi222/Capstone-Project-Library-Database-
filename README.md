@@ -39,6 +39,8 @@ Set `DATABASE_PATH=:memory:` to use a temporary in-memory database. `GET /health
 
 `GET /api/books/{id}` returns one book or `404`.
 
+`DELETE /api/books/{id}` removes a book with no loan history and returns `204`. It returns `404` if the book does not exist and `409` if any loan (active or returned) references it.
+
 `POST /api/books` creates a book and returns `201` with its record:
 
 ```json
@@ -58,6 +60,8 @@ Set `DATABASE_PATH=:memory:` to use a temporary in-memory database. `GET /health
 `GET /api/patrons?q=lee&limit=50&offset=0` lists patrons. `q` searches name and email.
 
 `GET /api/patrons/{id}` returns one patron or `404`.
+
+`DELETE /api/patrons/{id}` removes a reader with no loan history and returns `204`. It returns `404` if the reader does not exist and `409` if any loan (active or returned) references them.
 
 `POST /api/patrons` creates a patron and returns `201`:
 
