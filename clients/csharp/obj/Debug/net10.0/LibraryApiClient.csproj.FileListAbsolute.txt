@@ -1,0 +1,15 @@
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/bin/Debug/net10.0/LibraryApiClient
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/bin/Debug/net10.0/LibraryApiClient.deps.json
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/bin/Debug/net10.0/LibraryApiClient.runtimeconfig.json
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/bin/Debug/net10.0/LibraryApiClient.dll
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/bin/Debug/net10.0/LibraryApiClient.pdb
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.AssemblyInfoInputs.cache
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.AssemblyInfo.cs
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.csproj.CoreCompileInputs.cache
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.sourcelink.json
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.dll
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/refint/LibraryApiClient.dll
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.pdb
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/LibraryApiClient.genruntimeconfig.cache
+/workspaces/Capstone-Project-Library-Database-/clients/csharp/obj/Debug/net10.0/ref/LibraryApiClient.dll
